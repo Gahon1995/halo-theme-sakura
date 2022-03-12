@@ -46,6 +46,25 @@
 			<@global.footer />
 		</div>
 		<div class="footer-device">
+			<p>
+				<#if show_love_time!true>
+					<!-- 恋爱时间 -->
+					<span id="timeDate">正在载入...</span><span id="times"><span><i class="fa fa-spinner fa-spin"> </i></span></span>
+				</#if>
+				<span class="author">
+					© ${.now?string("yyyy")} ${(user.nickname)!}
+					<#if settings.footer_case_number??  && settings.footer_case_number != "">
+					&nbsp;
+					<a href="https://beian.miit.gov.cn/" target="_blank">${settings.footer_case_number}</a>
+					</#if>
+					<#if settings.footer_ga_case_number??  && settings.footer_ga_case_number != "">
+					&nbsp;
+					<a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=${settings.footer_ga_select_number!}" target="_blank">
+						<img src="${res_base_url!}/source/images/other/gongan.png">${settings.footer_ga_case_number}
+					</a>
+					</#if>
+				</span>
+			</p>
 			<#-- 请尊重作者，务必保留版权! -->
 			<p style="font-family: 'Ubuntu', sans-serif;">
 				<span>Powered
@@ -59,19 +78,6 @@
 					by
 					<a rel="me" target="_blank" href="https://github.com/LIlGG/halo-theme-sakura" style="text-decoration:none;">LIlGG</a>
 				</span>
-			</p>
-			<p>
-				© ${.now?string("yyyy")} ${(user.nickname)!}
-				<#if settings.footer_case_number??  && settings.footer_case_number != "">
-				&nbsp;
-				<a href="https://beian.miit.gov.cn/" target="_blank">${settings.footer_case_number}</a>
-				</#if>
-				<#if settings.footer_ga_case_number??  && settings.footer_ga_case_number != "">
-				&nbsp;
-				<a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=${settings.footer_ga_select_number!}" target="_blank">
-					<img src="${res_base_url!}/source/images/other/gongan.png">${settings.footer_ga_case_number}
-				</a>
-				</#if>
 			</p>
 		</div>
 	</div><!-- .site-info -->
@@ -257,6 +263,23 @@
 	};
 	/* ]]> */
 </script>
+<script type='text/javascript'>
+	var now = new Date(); 
+	function createtime() {
+		var grt= new Date("${settings.love_time}");//恋爱时间(月/日/年 - 2016.10.9)
+		now.setTime(now.getTime()+250); 
+		days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+		hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+		if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+		mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+		seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+		snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+		document.getElementById("timeDate").innerHTML = " 我们已经相爱了 "
+		document.getElementById("times").innerHTML = dnum +" 天 " + hnum + " 时 " + mnum + " 分 " + snum + " 秒"; 
+		document.getElementById("times").style.color="#FF0000";
+	}
+	setInterval(createtime,250);
+</script>
 <script type='text/javascript' src='${res_base_url!}/script/utils.min.js?ver=1.3.3'></script>
 <script type="text/javascript" src="${res_base_url!}/source/lib/lazysizes/lazysizes.min.js" async></script>
 <script type="text/javascript" src="${res_base_url!}/source/js/lib.js"></script>
@@ -319,6 +342,20 @@
 <div class="site-statistics">
 	<@global.statistics />
 </div>
+<#--  鼠标点击特效  -->
+<#if settings.click_effect_boom!true || settings.click_effect_heart!true >
+<canvas class="fireworks" style="position:fixed;left:0;top:0;z-index:99999999;pointer-events:none;"></canvas>
+</#if>
+<#if settings.click_effect_heart!true >
+<script type='text/javascript' src='${res_base_url!}/script/love.js?ver=1.3.3'></script>
+</#if>
+<#if settings.click_effect_boom!true >
+<script type='text/javascript' src='${res_base_url!}/script/anime.min.js?ver=1.3.3'></script>
+<script type='text/javascript' src='${res_base_url!}/script/fireworks.js?ver=1.3.3'></script>
+</#if>
+<#if settings.show_sakura!true >
+<script type='text/javascript' src='${res_base_url!}/script/sakura.js?ver=1.3.3'></script>
+</#if>
 </body>
 </html>
 </#macro>

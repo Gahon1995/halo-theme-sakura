@@ -608,6 +608,17 @@ post:
       name: wechat_code
       label: 微信打赏
       type: attachment
+    post_license:
+      name: post_license
+      label: 展示版权
+      type: radio
+      data-type: bool
+      default: true
+      options:
+        - value: true
+          label: 开启
+        - value: false
+          label: 关闭
     code_line:
       name: code_line
       label: 开启代码行号
@@ -2083,6 +2094,59 @@ plugin:
       data-type: bool
       default: false
       description: 数学公式还需要在文章元数据中填写 【K：math, V：true】 才能开启
+      options:
+        - value: true
+          label: 开启
+        - value: false
+          label: 关闭
+gahon:
+  label: 定制化配置
+  items:
+    show_love_time:
+      name: show_love_time
+      label: 展示爱情时间
+      type: radio
+      data-type: bool
+      default: false
+      options:
+        - value: true
+          label: 开启
+        - value: false
+          label: 关闭
+    love_time:
+      name: love_time           
+      label: 在一起时间             
+      type: text              
+      placeholder: '05/21/2021 13:15:44' 
+      description: '展示的话必须设置'     
+    click_effect_boom:  
+      name: click_effect_boom
+      label: 鼠标点击爆炸特效
+      type: radio
+      data-type: bool
+      default: false
+      options:
+        - value: true
+          label: 开启
+        - value: false
+          label: 关闭
+    click_effect_heart:  
+      name: click_effect_heart
+      label: 鼠标点击爱心特效
+      type: radio
+      data-type: bool
+      default: false
+      options:
+        - value: true
+          label: 开启
+        - value: false
+          label: 关闭
+    show_sakura:  
+      name: show_sakura
+      label: 页面樱花飘落
+      type: radio
+      data-type: bool
+      default: false
       options:
         - value: true
           label: 开启
