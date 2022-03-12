@@ -3819,7 +3819,7 @@ li.feature-2 {
 */
 .header-info:before {
 	position: absolute;
-	left: 30%;
+	left: 50%;
 	margin-left: -15px;
 	border-width: 15px;
 	border-style: solid;
